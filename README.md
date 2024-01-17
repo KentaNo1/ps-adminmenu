@@ -2,7 +2,7 @@
 The Admin Menu crafted by [OK1ez](https://github.com/OK1ez) and our dedicated team is user-friendly and intuitive. We invite you to contribute by submitting new features through PRs. We're always eager to review and consider new features. Make sure you use our template when opening Issues or they will be auto closed. 
 
 ## Unofficial ESX Version
-Made by Avilchiis for the community, you can download it [here](https://github.com/avilchiis/ps-adminmenu). **WE DO NOT PROVIDE SUPPORT FOR ESX VERSION, DO NOT ASK YOU'LL BE IGNORED.**
+Made by Kenta for the community, you can download it [here](https://github.com/KentaKK/ps-adminmenu). **WE PROVIDE SUPPORT FOR ESX VERSION.**
 
 # Preview
 <img src="https://github.com/Project-Sloth/ps-adminmenu/assets/82112471/0da6cf4d-fc72-497f-a59c-08011b3785ab" width="300">
@@ -21,13 +21,6 @@ Made by Avilchiis for the community, you can download it [here](https://github.c
 | **Alias**     | **Language Names** |
 |--------------|---------------|
 |en      |English    |
-|fr      |French    |
-|id      |Indonesia    |
-|pt-br      |Brazilian Portuguese    |
-|tr      |Turkish    |
-|es      |Spanish    |
-|nl      |Dutch    |
-|no      |Norwegian    |
 
 # Features
 * Admin Car
@@ -43,8 +36,8 @@ Made by Avilchiis for the community, you can download it [here](https://github.c
 * Clothing Menu
 * Copy Coordinates
 * Delete Vehicle
-* Delete Laser
 * Explode Player
+* Set on fire player
 * Fix Vehicle
 * Freeze Player
 * Give Clothing Menu
@@ -53,14 +46,12 @@ Made by Avilchiis for the community, you can download it [here](https://github.c
 * Give Money
 * Give Money to All
 * Give Vehicle to Player
-* Give NUI Focus
 * God Mode
 * Invisible
 * Infinite Ammo
 * Kick Player
 * Kill Player
 * Make Player Drunk
-* Message Player
 * Mute Player
 * Max Vehicle Mods
 * No Clip
@@ -70,17 +61,13 @@ Made by Avilchiis for the community, you can download it [here](https://github.c
 * Play Sound
 * Refuel Vehicle
 * Remove Money
-* Remove Stress
 * Revive All
 * Revive Player
 * Revive Radius
 * Set Bucket
-* Server Announcement
 * Set Ammo
 * Set Vehicle State in Garage (In & Out)
-* Set Gang
 * Set Job
-* Set on Fire
 * Set Permissions
 * Set Player Ped
 * Sit in Vehicle
@@ -90,19 +77,21 @@ Made by Avilchiis for the community, you can download it [here](https://github.c
 * Teleport to Coordinates
 * Teleport to Marker
 * Teleport to player
-* Toggle Blackout
+* Toggle Blackout (only vSync)
 * Toggle Blips
 * Toggle Coords
-* Toggle Cuffs
+* --Toggle Cuffs
 * Toggle Delete Laser
-* Toggle Duty
+* --Toggle Duty
 * Toggle Names
 * Vehicle Dev Menu
 * Warn player
   
 # Depedency
-1. [qb-core](https://github.com/qbcore-framework/qb-core)
-2. [ox_lib](https://github.com/overextended/ox_lib) 
+1. [esx-core](https://github.com/KentaKK/es_extended)
+2. [ox_lib](https://github.com/overextended/ox_lib)
+3. [ox_inventory](https://github.com/overextended/ox_inventory/releases)
+4. [vSync](https://github.com/KentaKK/vSync) (optional)
 
 # Installation
 1. Download the latest release.
