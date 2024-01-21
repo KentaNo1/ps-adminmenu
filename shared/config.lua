@@ -195,15 +195,6 @@ Config.Actions = {
         },
     },
 
-    ["set_ammo"] = {
-        label = "Set Ammo",
-        perms = "admin",
-        dropdown = {
-            { label = "Ammo Ammount", option = "text" },
-            { label = "Confirm",      option = "button", type = "client", event = "ps-adminmenu:client:SetAmmo" },
-        },
-    },
-
     -- ["nui_focus"] = {
     --     label = "Give NUI Focus",
     --     perms = "admin",
