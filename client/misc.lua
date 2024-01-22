@@ -26,6 +26,28 @@ RegisterNetEvent('ps-adminmenu:client:ToggleGodmode', function(data)
     end
 end)
 
+-- Trigger Client Event
+RegisterNetEvent('ps-adminmenu:client:TriggerClientEvent', function(data, selectedData)
+    local data = CheckDataFromKey(data)
+    if not data or not CheckPerms(data.perms) then return end
+    if not selectedData["Event Name"] then return ESX.ShowNotification("Nem írtál be semmit") end
+    local event = selectedData["Event Name"].value
+    TriggerEvent("ps-adminmenu:client:CloseUI")
+    Wait(500)
+    TriggerEvent(event)
+end)
+
+-- Trigger Server Event
+RegisterNetEvent('ps-adminmenu:client:TriggerServerEvent', function(data, selectedData)
+    local data = CheckDataFromKey(data)
+    if not data or not CheckPerms(data.perms) then return end
+    if not selectedData["Event Name"] then return ESX.ShowNotification("Nem írtál be semmit") end
+    local event = selectedData["Event Name"].value
+    TriggerEvent("ps-adminmenu:client:CloseUI")
+    Wait(500)
+    TriggerServerEvent(event)
+end)
+
 -- Cuff/Uncuff
 RegisterNetEvent('ps-adminmenu:client:ToggleCuffs', function(player)
     local target = GetPlayerServerId(player)

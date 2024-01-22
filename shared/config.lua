@@ -580,6 +580,24 @@ Config.Actions = {
         },
     },
 
+    ["trigger_c"] = {
+        label = "Client Event",
+        perms = "superadmin",
+        dropdown = {
+            { label = "Event Name",   option = "text" },
+            { label = "Confirm", option = "button", type = "client", event = "ps-adminmenu:client:TriggerClientEvent" },
+        },
+    },
+
+    ["trigger_s"] = {
+        label = "Server Event",
+        perms = "superadmin",
+        dropdown = {
+            { label = "Event Name",   option = "text" },
+            { label = "Confirm", option = "button", type = "client", event = "ps-adminmenu:client:TriggerServerEvent" },
+        },
+    },
+
     ["max_mods"] = {
         label = "Max Vehicle Mods",
         type = "client",
