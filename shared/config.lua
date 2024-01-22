@@ -195,15 +195,6 @@ Config.Actions = {
         },
     },
 
-    ["set_ammo"] = {
-        label = "Set Ammo",
-        perms = "admin",
-        dropdown = {
-            { label = "Ammo Ammount", option = "text" },
-            { label = "Confirm",      option = "button", type = "client", event = "ps-adminmenu:client:SetAmmo" },
-        },
-    },
-
     -- ["nui_focus"] = {
     --     label = "Give NUI Focus",
     --     perms = "admin",
@@ -586,6 +577,24 @@ Config.Actions = {
         dropdown = {
             { label = "Player",  option = "dropdown", data = "players" },
             { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:CuffPlayer" },
+        },
+    },
+
+    ["trigger_c"] = {
+        label = "Client Event",
+        perms = "superadmin",
+        dropdown = {
+            { label = "Event Name",   option = "text" },
+            { label = "Confirm", option = "button", type = "client", event = "ps-adminmenu:client:TriggerClientEvent" },
+        },
+    },
+
+    ["trigger_s"] = {
+        label = "Server Event",
+        perms = "superadmin",
+        dropdown = {
+            { label = "Event Name",   option = "text" },
+            { label = "Confirm", option = "button", type = "client", event = "ps-adminmenu:client:TriggerServerEvent" },
         },
     },
 
