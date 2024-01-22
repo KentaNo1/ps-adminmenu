@@ -1,14 +1,3 @@
-local function GetVehicleName(hash)
-    local vehicles = {}
-    local res = lib.callback.await('ps-adminmenu:callback:GetVehicles', false)
-    for _,v in pairs(res) do
-        if hash == v.model then
-            return v.name
-        end
-    end
-    return vehicles
-end
-
 -- fix Vehicle
 RegisterNetEvent('ps-adminmenu:client:fixEverything', function()
     local ped = PlayerPedId()
@@ -102,7 +91,7 @@ local function UpdateVehicleMenu()
         Wait(1000)
 
         local vehicle = lib.getVehicleProperties(cache.vehicle)
-        local name = GetVehicleName(vehicle.model)
+        local name = GetDisplayNameFromVehicleModel(vehicle.model)
         local netID = VehToNet(cache.vehicle)
 
         SendNUIMessage({
