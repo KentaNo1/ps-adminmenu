@@ -26,6 +26,28 @@ RegisterNetEvent('ps-adminmenu:client:ToggleGodmode', function(data)
     end
 end)
 
+-- Trigger Client Event
+RegisterNetEvent('ps-adminmenu:client:TriggerClientEvent', function(data, selectedData)
+    local data = CheckDataFromKey(data)
+    if not data or not CheckPerms(data.perms) then return end
+    if not selectedData["Event Name"] then return ESX.ShowNotification("Nem írtál be semmit") end
+    local event = selectedData["Event Name"].value
+    TriggerEvent("ps-adminmenu:client:CloseUI")
+    Wait(500)
+    TriggerEvent(event)
+end)
+
+-- Trigger Server Event
+RegisterNetEvent('ps-adminmenu:client:TriggerServerEvent', function(data, selectedData)
+    local data = CheckDataFromKey(data)
+    if not data or not CheckPerms(data.perms) then return end
+    if not selectedData["Event Name"] then return ESX.ShowNotification("Nem írtál be semmit") end
+    local event = selectedData["Event Name"].value
+    TriggerEvent("ps-adminmenu:client:CloseUI")
+    Wait(500)
+    TriggerServerEvent(event)
+end)
+
 -- Cuff/Uncuff
 RegisterNetEvent('ps-adminmenu:client:ToggleCuffs', function(player)
     local target = GetPlayerServerId(player)
@@ -129,46 +151,17 @@ RegisterNetEvent('ps-adminmenu:client:ToggleCoords', function(data)
     end
 end)
 
--- Set Ammo
-RegisterNetEvent('ps-adminmenu:client:SetAmmo', function(data, selectedData)
-    local data = CheckDataFromKey(data)
-    if not data or not CheckPerms(data.perms) then return end
-    if not selectedData["Ammo Ammount"].value then return ESX.ShowNotification("Nem írtál be mennyiséget", 'error') end
-    local ammo = selectedData["Ammo Ammount"].value
-    local weapon = GetSelectedPedWeapon(cache.ped)
-
-    if weapon ~= nil then
-        SetPedAmmo(cache.ped, weapon, ammo)
-        ESX.ShowNotification(_U("set_wepaon_ammo", tostring(ammo)), 'success')
-    else
-        ESX.ShowNotification(_U("no_weapon"), 'error')
-    end
-end)
-
-RegisterCommand("setammo", function()
-    if not CheckPerms('mod') then return end
-    local weapon = GetSelectedPedWeapon(cache.ped)
-    local ammo = 999
-    if weapon then
-        SetPedAmmo(cache.ped, weapon, ammo)
-        ESX.ShowNotification(_U("set_wepaon_ammo", tostring(ammo)), 'success')
-    else
-        ESX.ShowNotification(_U("no_weapon"), 'error')
-    end
-end, false)
-
 --Toggle Dev
 local ToggleDev = false
 
-RegisterNetEvent('ps-adminmenu:client:ToggleDev', function(data)
-    local data = CheckDataFromKey(data)
+RegisterNetEvent('ps-adminmenu:client:ToggleDev', function(dataKey)
+    local data = CheckDataFromKey(dataKey)
     if not data or not CheckPerms(data.perms) then return end
 
     ToggleDev = not ToggleDev
 
-    --TriggerEvent("qb-admin:client:ToggleDevmode")           -- toggle dev mode (ps-hud/qb-hud)
-    TriggerEvent('ps-adminmenu:client:ToggleCoords', data)  -- toggle Coords
-    TriggerEvent('ps-adminmenu:client:ToggleGodmode', data) -- Godmode
+    TriggerEvent('ps-adminmenu:client:ToggleCoords', dataKey)  -- toggle Coords
+    TriggerEvent('ps-adminmenu:client:ToggleGodmode', dataKey) -- Godmode
 
     ESX.ShowNotification(_U("toggle_dev"), 'success')
 end)
