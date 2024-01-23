@@ -1,3 +1,5 @@
+local ObjectList = require "data.object"
+
 -- Toggles Invincibility
 local visible = true
 RegisterNetEvent('ps-adminmenu:client:ToggleInvisible', function(data)
@@ -204,4 +206,20 @@ RegisterNetEvent("ps-adminmenu:client:setPed", function(pedModels)
     SetPlayerModel(cache.playerId, pedModels)
     SetPedDefaultComponentVariation(cache.ped)
     SetModelAsNoLongerNeeded(pedModels)
+end)
+
+-- Delete objects
+RegisterNetEvent("ps-adminmenu:client:DeleteAllObjects", function()
+    local o = GetGamePool('CObject')
+    local c = GetEntityCoords(PlayerPedId())
+    for i=1, #o do
+        DeleteEntity(o[i])
+    end
+    for _,v in pairs(ObjectList) do
+        local p = GetClosestObjectOfType(c.x, c.y, c.z, 300.0, joaat(v), false, false, false)
+        if p then
+            SetEntityAsMissionEntity(p, true, true)
+            DeleteObject(p)
+        end
+    end
 end)
