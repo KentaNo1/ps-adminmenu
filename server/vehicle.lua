@@ -204,7 +204,6 @@ RegisterNetEvent('ps-adminmenu:server:DeleteRadiusObjects', function(data, selec
         end
     end
     TriggerClientEvent('esx:showNotification', src,  _U( "object_deleted", d), 'success', 7500)
-    TriggerClientEvent('ps-adminmenu:client:DeleteRadiusObjects', -1)
 end)
 
 -- Delete all objects
