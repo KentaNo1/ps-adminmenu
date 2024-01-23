@@ -177,6 +177,40 @@ Config.Actions = {
         perms = "admin",
     },
 
+    ["delete_vehicle_radius"] = {
+        label = "Delete Vehicle Radius",
+        perms = "admin",
+        dropdown = {
+            { label = "Radius",  option = "text" },
+            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:DeleteRadiusVehicles" },
+        },
+    },
+
+    ["delete_ped_radius"] = {
+        label = "Delete Ped Radius",
+        perms = "admin",
+        dropdown = {
+            { label = "Radius",  option = "text" },
+            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:DeleteRadiusPeds" },
+        },
+    },
+
+    ["delete_object_radius"] = {
+        label = "Delete Object Radius",
+        perms = "admin",
+        dropdown = {
+            { label = "Radius",  option = "text" },
+            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:DeleteRadiusObjects" },
+        },
+    },
+
+    ["delete_all_objects"] = {
+        label = "Delete All Objects",
+        type = "server",
+        event = "ps-adminmenu:server:DeleteAllObjects",
+        perms = "admin",
+    },
+
     ["freeze_player"] = {
         label = "Freeze Player",
         perms = "admin",

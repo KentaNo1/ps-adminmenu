@@ -148,3 +148,75 @@ RegisterNetEvent('ps-adminmenu:server:FixVehFor', function(data, selectedData)
         TriggerClientEvent('esx:showNotification', src, _U("not_online"), "error")
     end
 end)
+
+-- Delete vehicles
+RegisterNetEvent('ps-adminmenu:server:DeleteRadiusVehicles', function(data, selectedData)
+    local data = CheckDataFromKey(data)
+    if not data or not CheckPerms(data.perms) then return end
+    local src = source
+    if not selectedData['Radius'] then return TriggerClientEvent('esx:showNotification', src, "Nem írtál be számot", "error") end
+    local c1 = GetEntityCoords(GetPlayerPed(src))
+    local v = GetAllVehicles()
+    local c2 = tonumber(selectedData['Radius'].value)
+    local d = 0
+    for i=1, #v do
+        if #(GetEntityCoords(v[i]) - c1) < c2 then
+            DeleteEntity(v[i])
+            d += 1
+        end
+    end
+    TriggerClientEvent('esx:showNotification', src,  _U( "veh_deleted", d), 'success', 7500)
+end)
+
+-- Delete peds
+RegisterNetEvent('ps-adminmenu:server:DeleteRadiusPeds', function(data, selectedData)
+    local data = CheckDataFromKey(data)
+    if not data or not CheckPerms(data.perms) then return end
+    local src = source
+    if not selectedData['Radius'] then return TriggerClientEvent('esx:showNotification', src, "Nem írtál be számot", "error") end
+    local c1 = GetEntityCoords(GetPlayerPed(src))
+    local v = GetAllPeds()
+    local c2 = tonumber(selectedData['Radius'].value)
+    local d = 0
+    for i=1, #v do
+        if #(GetEntityCoords(v[i]) - c1) < c2 then
+            DeleteEntity(v[i])
+            d += 1
+        end
+    end
+    TriggerClientEvent('esx:showNotification', src,  _U( "ped_deleted", d), 'success', 7500)
+end)
+
+-- Delete objects
+RegisterNetEvent('ps-adminmenu:server:DeleteRadiusObjects', function(data, selectedData)
+    local data = CheckDataFromKey(data)
+    if not data or not CheckPerms(data.perms) then return end
+    local src = source
+    if not selectedData['Radius'] then return TriggerClientEvent('esx:showNotification', src, "Nem írtál be számot", "error") end
+    local c1 = GetEntityCoords(GetPlayerPed(src))
+    local v = GetAllObjects()
+    local c2 = tonumber(selectedData['Radius'].value)
+    local d = 0
+    for i=1, #v do
+        if #(GetEntityCoords(v[i]) - c1) < c2 then
+            DeleteEntity(v[i])
+            d += 1
+        end
+    end
+    TriggerClientEvent('esx:showNotification', src,  _U( "object_deleted", d), 'success', 7500)
+end)
+
+-- Delete all objects
+RegisterNetEvent('ps-adminmenu:server:DeleteAllObjects', function(data)
+    local data = CheckDataFromKey(data)
+    if not data or not CheckPerms(data.perms) then return end
+    local src = source
+    local v = GetAllObjects()
+    local d = 0
+    for i=1, #v do
+        DeleteEntity(v[i])
+        d += 1
+    end
+    TriggerClientEvent('esx:showNotification', src,  _U( "object_deleted", d), 'success', 7500)
+    TriggerClientEvent('ps-adminmenu:client:DeleteAllObjects', -1)
+end)
