@@ -56,7 +56,8 @@ end)
 -- Set Job
 RegisterNetEvent('ps-adminmenu:server:SetJob', function(_, selectedData)
     local src = source
-    local playerId, Job, Grade = selectedData["Player"].value, selectedData["Job"].value, selectedData["Grade"].value
+    local Grade = selectedData["Grade"] and selectedData["Grade"].value or 0
+    local playerId, Job = selectedData["Player"].value, selectedData["Job"].value
     local xPlayer = ESX.GetPlayerFromId(tonumber(playerId))
     if xPlayer then
         local targetIdentifier = xPlayer.identifier
@@ -68,7 +69,7 @@ RegisterNetEvent('ps-adminmenu:server:SetJob', function(_, selectedData)
 end)
 
 -- Set Perms
-RegisterNetEvent("ps-adminmenu:server:SetPerms", function (data, selectedData)
+RegisterNetEvent("ps-adminmenu:server:SetPerms", function (_, selectedData)
     if not CheckPerms('superadmin') then return end
     local src = source
     local rank = selectedData["Permissions"].value

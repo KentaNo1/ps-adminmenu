@@ -30,16 +30,13 @@ RegisterNetEvent("ps-adminmenu:server:givecar", function(data, selectedData)
         return
     end
 
-    if not selectedData['Plate (Optional)'].value then return TriggerClientEvent('esx:showNotification', src, "No plate", "error", 5000) end
-
-    local plate = selectedData['Plate (Optional)'] and selectedData['Plate (Optional)'].value
+    local plate = selectedData['Plate (Optional)'] and selectedData['Plate (Optional)'].value or nil
     local vehmodel = selectedData['Vehicle'].value
     local vehicleData = lib.callback.await("ps-adminmenu:client:getvehData", src, vehmodel, plate)
 
-    if not next(vehicleData) then
+    if not vehicleData then
         return
     end
-
 
     local tsrc = selectedData['Player'].value
     local garage = selectedData['Garage (Optional)'] and selectedData['Garage (Optional)'].value or Config.DefaultGarage
