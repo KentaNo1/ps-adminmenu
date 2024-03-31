@@ -171,6 +171,7 @@ RegisterNetEvent("ps-adminmenu:client:SpawnPersonalVehicle", function(data, sele
 end)
 
 ---@param vehicle number
+---@param plate string
 ---@return table|nil
 lib.callback.register("ps-adminmenu:client:getvehData", function(vehicle, plate)
     lib.requestModel(vehicle)
@@ -178,7 +179,9 @@ lib.callback.register("ps-adminmenu:client:getvehData", function(vehicle, plate)
     local coords = vector4(g.x, g.y, g.z, GetEntityHeading(cache.ped) + 90)
     local veh = CreateVehicle(vehicle, coords.x, coords.y, coords.z, coords.w, false, false)
     Wait(300)
-    SetVehicleNumberPlateText(veh, plate)
+    if plate then
+        SetVehicleNumberPlateText(veh, plate)
+    end
     local prop = ESX.Game.GetVehicleProperties(veh)
 
     if DoesEntityExist(veh) then
