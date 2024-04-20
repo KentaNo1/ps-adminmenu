@@ -79,17 +79,18 @@ RegisterNetEvent('ps-adminmenu:server:GiveItem', function(data, selectedData)
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
 
+    if not selectedData["Player"].value or not selectedData["Item"].value or not selectedData["Amount"].value then return end
+
     local target = selectedData["Player"].value
     local item = selectedData["Item"].value
     local amount = selectedData["Amount"].value
     local Player = ESX.GetPlayerFromId(target)
 
-    if not item or not amount then return end
     if not Player then
         return TriggerClientEvent('esx:showNotification', source, _U("not_online"), 'error', 7500)
     end
 
-    Player.addInventoryItem(item, amount)
+    Player.addInventoryItem(item or "money", amount or 1)
     TriggerClientEvent('esx:showNotification', source,
         _U("give_item", tonumber(amount) .. " " .. item,
             Player.getName()), "success", 7500)
@@ -100,10 +101,11 @@ RegisterNetEvent('ps-adminmenu:server:GiveItemAll', function(data, selectedData)
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
 
+    if not selectedData["Item"].value or not selectedData["Amount"].value then return end
+
     local item = selectedData["Item"].value
     local amount = selectedData["Amount"].value
 
-    if not item or not amount then return end
     local players = ESX.GetExtendedPlayers()
 
     for _, id in pairs(players) do
