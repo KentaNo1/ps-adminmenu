@@ -36,7 +36,7 @@ RegisterNetEvent('ps-adminmenu:spectate:teleport', function(target)
     local ped = GetPlayerPed(target)
     if DoesEntityExist(ped) then
         local targetCoords = GetEntityCoords(ped)
-        SetEntityCoords(GetPlayerPed(source), targetCoords.x, targetCoords.y, targetCoords.z - 10)
+        SetEntityCoords(GetPlayerPed(source), targetCoords.x, targetCoords.y, targetCoords.z - 10, true, false, false, false)
         FreezeEntityPosition(GetPlayerPed(source), true)
     end
 end)
