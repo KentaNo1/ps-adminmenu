@@ -1,7 +1,4 @@
 function showNotification(source, msg, type)
-    if not source or not tonumber(source) then
-        return -- I don't know, just in case
-    end
     TriggerClientEvent('esx:showNotification', source, msg, type)
 end
 
