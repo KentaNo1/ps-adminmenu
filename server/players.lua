@@ -56,8 +56,8 @@ end)
 -- Set Job
 RegisterNetEvent('ps-adminmenu:server:SetJob', function(_, selectedData)
     local src = source
-    local Grade = selectedData["Grade"] and selectedData["Grade"].value or 0
-    local playerId, Job = selectedData["Player"].value, selectedData["Job"].value
+    local Grade = selectedData["Grade"].value or 0
+    local playerId, Job = selectedData["Player"].value, selectedData["Job"].value or "unemployed"
     local xPlayer = ESX.GetPlayerFromId(tonumber(playerId))
     if xPlayer then
         local targetIdentifier = xPlayer.identifier
