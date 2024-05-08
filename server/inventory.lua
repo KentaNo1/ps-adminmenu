@@ -74,12 +74,40 @@ RegisterNetEvent('ps-adminmenu:server:OpenTrunk', function(data)
     exports.ox_inventory:forceOpenInventory(source, 'trunk', tostring(data))
 end)
 
+-- Add Item
+RegisterNetEvent('ps-adminmenu:server:AddItem', function(data, selectedData)
+    local data = CheckDataFromKey(data)
+    if not data or not CheckPerms(data.perms) then return end
+
+    if not selectedData["Name"] then return end
+    if not selectedData["Label"] then return end
+    if not selectedData["Weight"] then return end
+
+    local name = selectedData["Name"].value
+    local label = selectedData["Label"].value
+    local weight = selectedData["Weight"].value
+
+    MySQL.insert('INSERT INTO `items` (`name`, `label`, `weight`) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE name = VALUES(name)', {name, label, weight})
+end)
+
+-- Delete Item
+RegisterNetEvent('ps-adminmenu:server:DeleteItem', function(data, selectedData)
+    local data = CheckDataFromKey(data)
+    if not data or not CheckPerms(data.perms) then return end
+
+    if not selectedData["Item"] then return end
+
+    local item = selectedData["Item"].value
+
+    MySQL.update('DELETE FROM `items` WHERE `name` = ?', {item})
+end)
+
 -- Give Item
 RegisterNetEvent('ps-adminmenu:server:GiveItem', function(data, selectedData)
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
 
-    if not selectedData["Player"].value or not selectedData["Item"].value or not selectedData["Amount"].value then return end
+    if not selectedData["Player"] or not selectedData["Item"] or not selectedData["Amount"] then return end
 
     local target = selectedData["Player"].value
     local item = selectedData["Item"].value
@@ -101,7 +129,7 @@ RegisterNetEvent('ps-adminmenu:server:GiveItemAll', function(data, selectedData)
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
 
-    if not selectedData["Item"].value or not selectedData["Amount"].value then return end
+    if not selectedData["Item"] or not selectedData["Amount"] then return end
 
     local item = selectedData["Item"].value
     local amount = selectedData["Amount"].value
