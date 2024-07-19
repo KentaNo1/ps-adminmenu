@@ -472,6 +472,26 @@ Config.Actions = {
         },
     },
 
+    ["add_item"] = {
+        label = "Add Item to Database",
+        perms = "admin",
+        dropdown = {
+            { label = "Name",  option = "text" },
+            { label = "Label",  option = "text" },
+            { label = "Weight",  option = "text" },
+            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:AddItem" },
+        },
+    },
+
+    ["delete_item"] = {
+        label = "Delete Item from Database",
+        perms = "admin",
+        dropdown = {
+            { label = "Item",    option = "dropdown", data = "items" },
+            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:DeleteItem" },
+        },
+    },
+
     ["give_item"] = {
         label = "Give Item",
         perms = "admin",

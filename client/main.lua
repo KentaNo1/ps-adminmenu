@@ -2,7 +2,7 @@ PlayerData = {}
 
 local function setupMenu()
 	Wait(1000)
-	PlayerData = ESX.PlayerData
+	PlayerData = ESX.GetPlayerData()
 	local resources = lib.callback.await('ps-adminmenu:callback:GetResources', false)
 	local commands = lib.callback.await('ps-adminmenu:callback:GetCommands', false)
 	GetData()

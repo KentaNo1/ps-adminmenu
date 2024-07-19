@@ -3,9 +3,9 @@ game 'gta5'
 lua54 'yes'
 use_experimental_fxv2_oal 'yes'
 
-author "Project Sloth & OK1ez"
-version '1.1.2'
-description 'Admin Menu'
+author "Project Sloth & OK1ez & Kenta"
+version '2.0.0'
+description 'Admin Menu for ESX'
 repository 'https://github.com/Project-Sloth/ps-adminmenu'
 
 ui_page 'html/index.html'
@@ -31,4 +31,8 @@ client_scripts {
 server_scripts {
   "server/*.lua",
   "@oxmysql/lib/MySQL.lua"
+}
+
+dependencies {
+    'es_extended'
 }

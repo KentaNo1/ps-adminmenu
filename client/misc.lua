@@ -8,6 +8,7 @@ RegisterNetEvent('ps-adminmenu:client:ToggleInvisible', function(data)
     visible = not visible
 
     SetEntityVisible(cache.ped, visible, false)
+    ESX.ShowNotification("Invisible", visible and "enabled" or "disabled")
 end)
 
 -- God Mode
@@ -52,11 +53,14 @@ end)
 
 -- Cuff/Uncuff
 RegisterNetEvent('ps-adminmenu:client:ToggleCuffs', function(player)
-    local target = GetPlayerServerId(player)
-    TriggerEvent("police:client:GetCuffed", target)
+    --local target = GetPlayerServerId(player)
+    ESX.ShowNotification("This function is disabled, check client/misc.lua")
+    --Add your own event/export
+    --TriggerEvent("police:client:GetCuffed", target)
 end)
 
--- Copy Coordinates
+--- Copy Coordinates
+---@param data string
 local function CopyCoords(data)
     local coords = GetEntityCoords(cache.ped)
     local heading = GetEntityHeading(cache.ped)
@@ -126,7 +130,7 @@ end)
 local showCoords = false
 local function showCoordsMenu()
     while showCoords do
-        Wait(50)
+        Wait(200)
         local coords = GetEntityCoords(PlayerPedId())
         local heading = GetEntityHeading(PlayerPedId())
         SendNUIMessage({

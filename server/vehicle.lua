@@ -3,11 +3,11 @@ RegisterNetEvent('ps-adminmenu:server:SaveCar', function(vehicle)
     local src = source
     local Player = ESX.GetPlayerFromId(src)
     local plate = vehicle.plate
-    local result = MySQL.query.await('SELECT plate FROM owned_vehicles WHERE plate = ?', { plate })
+    local result = MySQL.query.await('SELECT `plate` FROM `owned_vehicles` WHERE plate = ?', { plate })
 
     if result[1] == nil then
         MySQL.prepare(
-        'INSERT INTO owned_vehicles (`owner`, `vehicle`, `plate`, `stored`) VALUES (?, ?, ?, ?)',
+        'INSERT INTO `owned_vehicles` (`owner`, `vehicle`, `plate`, `stored`) VALUES (?, ?, ?, ?)',
             {
                 Player.identifier,
                 json.encode(vehicle),
@@ -30,7 +30,7 @@ RegisterNetEvent("ps-adminmenu:server:givecar", function(data, selectedData)
         return
     end
 
-    local plate = selectedData['Plate (Optional)'] and selectedData['Plate (Optional)'].value or nil
+    local plate = selectedData['Plate (Optional)'] and selectedData['Plate (Optional)'].value or 'KENTA'..math.random(1, 9999)
     local vehmodel = selectedData['Vehicle'].value
     local vehicleData = lib.callback.await("ps-adminmenu:client:getvehData", src, vehmodel, plate)
 
