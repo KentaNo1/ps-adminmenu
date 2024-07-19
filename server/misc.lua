@@ -1,17 +1,19 @@
 -- Ban Player
 RegisterNetEvent('ps-adminmenu:server:BanPlayer', function(data, selectedData)
+    local source = source
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
 
     local player = selectedData["Player"].value
     local reason = selectedData["Reason"].value or ""
     local time = selectedData["Duration"].value
-    local xPlayer = ESX.GetPlayerFromId(player)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local targetidentifiers = GetPlayerIdentifiers(player.source)
 
     local banTime = tonumber(os.time() + time)
     local timeTable = os.date('*t', banTime)
 
-    MySQL.prepare('INSERT INTO bans (name, license, reason, expire, bannedby) VALUES (?, ?, ?, ?, ?)', {GetPlayerName(player), xPlayer.identifier, reason, banTime, GetPlayerName(source)})
+    MySQL.prepare('INSERT INTO `bwh_bans` (`receiver`, `sender`, `length`, `reason`) VALUES(?, ?, ?, ?)', {json.encode(targetidentifiers), xPlayer.identifier, time, reason})
 
     if time == 2147483647 then
         DropPlayer(player, _U("banned") .. '\n' .. _U("reason") .. reason .. _U("ban_perm"))
@@ -36,21 +38,16 @@ RegisterNetEvent('ps-adminmenu:server:WarnPlayer', function(data, selectedData)
     if not data or not CheckPerms(data.perms) then return end
     local targetId = selectedData["Player"].value
     local target = ESX.GetPlayerFromId(targetId)
-    local reason = selectedData["Reason"].value
+    local reason = selectedData["Reason"].value or ""
     local sender = ESX.GetPlayerFromId(source)
-    local warnId = 'WARN-' .. math.random(1111, 9999)
+    --local warnId = 'WARN-' .. math.random(1111, 9999)
     if target then
-        TriggerClientEvent('esx:showNotification', target.source, _U("warned") .. ", for: " .. _U("reason") .. ": " .. reason, 'inform', 10000)
+        TriggerClientEvent("el_bwh:receiveWarn",target.source, sender.getName(), reason)
+        --TriggerClientEvent('esx:showNotification', target.source, _U("warned") .. ", for: " .. _U("reason") .. ": " .. reason, 'inform', 10000)
 
         TriggerClientEvent('esx:showNotification', source,_U("warngiven") .. GetPlayerName(target.source) .. ", for: " .. reason)
 
-        MySQL.prepare('INSERT INTO player_warns (senderIdentifier, targetIdentifier, reason, warnId) VALUES (?, ?, ?, ?)',
-            {
-                sender.identifier,
-                target.identifier,
-                reason,
-                warnId
-            })
+        MySQL.prepare('INSERT INTO `bwh_warnings` (`receiver`, `sender`, `message`) VALUES(?, ?, ?)',{target.identifier, sender.identifier, reason})
     else
         TriggerClientEvent('esx:showNotification', source, _U("not_online"), 'error')
     end
