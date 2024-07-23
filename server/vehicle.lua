@@ -30,7 +30,7 @@ RegisterNetEvent("ps-adminmenu:server:givecar", function(data, selectedData)
         return
     end
 
-    local plate = selectedData['Plate (Optional)'] and selectedData['Plate (Optional)'].value or 'KENTA'..math.random(1, 9999)
+    local plate = selectedData['Plate (Optional)'].value or ('KENTA'..math.random(100, 999))
     local vehmodel = selectedData['Vehicle'].value
     local vehicleData = lib.callback.await("ps-adminmenu:client:getvehData", src, vehmodel, plate)
 
@@ -70,7 +70,7 @@ RegisterNetEvent("ps-adminmenu:server:givecar", function(data, selectedData)
             1
         })
 
-        TriggerClientEvent('esx:showNotification', src, _U("givecar.success.source", vehmodel, Player.getName()), "success", 5000) --("%s %s"):format(Player.getName())), "success", 5000)
+        TriggerClientEvent('esx:showNotification', src, _U("givecar.success.source", vehmodel, Player.getName()), "success", 5000)
         TriggerClientEvent('esx:showNotification', Player.source, _U("givecar.success.target", plate:upper(), garage), "success", 5000)
 end)
 

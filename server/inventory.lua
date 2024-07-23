@@ -44,7 +44,7 @@ RegisterNetEvent('ps-adminmenu:server:ClearInventoryOffline', function(data, sel
             _U("invcleared", Player.getName()),
             'success', 7500)
     else
-        MySQL.query("SELECT * FROM users WHERE citizenid = ?", {citizenId},
+        MySQL.query("SELECT 1 FROM `users` WHERE `citizenid` = ?", {citizenId},
             function(result)
                 if result and result[1] then
                     MySQL.update("UPDATE users SET inventory = '{}' WHERE citizenid = ?", {citizenId})
@@ -78,10 +78,6 @@ end)
 RegisterNetEvent('ps-adminmenu:server:AddItem', function(data, selectedData)
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
-
-    if not selectedData["Name"] then return end
-    if not selectedData["Label"] then return end
-    if not selectedData["Weight"] then return end
 
     local name = selectedData["Name"].value
     local label = selectedData["Label"].value
@@ -129,10 +125,8 @@ RegisterNetEvent('ps-adminmenu:server:GiveItemAll', function(data, selectedData)
     local data = CheckDataFromKey(data)
     if not data or not CheckPerms(data.perms) then return end
 
-    if not selectedData["Item"] or not selectedData["Amount"] then return end
-
-    local item = selectedData["Item"].value
-    local amount = selectedData["Amount"].value
+    local item = selectedData["Item"].value or 'money'
+    local amount = selectedData["Amount"].value or 1
 
     local players = ESX.GetExtendedPlayers()
 
