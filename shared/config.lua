@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 Config = Config or {}
 
 Config.Locale = 'en'
