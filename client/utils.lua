@@ -14,7 +14,7 @@ end
 ---@param perms string|table
 ---@return boolean
 local function isAdmin(perms)
-    local myGroup = ESX.PlayerData.group
+    local myGroup = ESX.GetPlayerData().group
     if myGroup == "superadmin" then return true end
     if type(perms) == "table" then
         for _,v in pairs(perms) do
