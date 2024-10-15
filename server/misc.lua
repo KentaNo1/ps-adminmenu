@@ -117,8 +117,6 @@ RegisterNetEvent('ps-adminmenu:server:SetBucket', function(data, selectedData)
     local currentBucket = GetPlayerRoutingBucket(player)
 
     if bucket == currentBucket then
-        print(bucket)
-        print(currentBucket)
         return TriggerClientEvent('esx:showNotification', src, _U("target_same_bucket", player), 'error', 7500)
     end
 
@@ -133,7 +131,7 @@ RegisterNetEvent('ps-adminmenu:server:GetBucket', function(data, selectedData)
 
     local src = source
     local player = selectedData["Player"].value
-    local currentBucket = GetPlayerRoutingBucket(player--[[@as string]])
+    local currentBucket = GetPlayerRoutingBucket(player)
 
     TriggerClientEvent('esx:showNotification', src, _U("bucket_get", player, currentBucket), 'success', 7500)
 end)
