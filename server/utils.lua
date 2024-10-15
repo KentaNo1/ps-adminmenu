@@ -90,11 +90,11 @@ end)
 --- @param source number
 --- @param target number
 function CheckRoutingbucket(source, target)
-    local sourceBucket = GetPlayerRoutingBucket(source)
-    local targetBucket = GetPlayerRoutingBucket(target)
+    local sourceBucket = GetPlayerRoutingBucket(source--[[@as string]])
+    local targetBucket = GetPlayerRoutingBucket(target--[[@as string]])
 
     if sourceBucket == targetBucket then return end
 
-    SetPlayerRoutingBucket(source, targetBucket)
+    SetPlayerRoutingBucket(source--[[@as string]], targetBucket)
     TriggerClientEvent('esx:showNotification', source, _U("bucket_set", targetBucket), 'error', 7500)
 end

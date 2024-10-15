@@ -120,7 +120,7 @@ RegisterNetEvent('ps-adminmenu:server:SetBucket', function(data, selectedData)
         return TriggerClientEvent('esx:showNotification', src, _U("target_same_bucket", player), 'error', 7500)
     end
 
-    SetPlayerRoutingBucket(player, bucket)
+    SetPlayerRoutingBucket(player, tonumber(bucket))
     TriggerClientEvent('esx:showNotification', src, _U("bucket_set_for_target", player, bucket), 'success', 7500)
 end)
 

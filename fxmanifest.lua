@@ -4,7 +4,7 @@ lua54 'yes'
 use_experimental_fxv2_oal 'yes'
 
 author 'Project Sloth & OK1ez'
-version '2.0.1'
+version '2.0.2'
 description 'Admin Menu'
 repository 'https://github.com/KentaNo1/ps-adminmenu'
 

@@ -21,7 +21,7 @@ end
 -- Event Handlers
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded',function(xPlayer)
-	ESX.PlayerData = xPlayer
+	PlayerData = xPlayer
 	setupMenu()
 end)
 
